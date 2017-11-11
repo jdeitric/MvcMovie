@@ -9,22 +9,22 @@ using MvcMovie.Models;
 
 namespace MvcMovie.Controllers
 {
-    public class ReviewModelsController : Controller
+    public class ReviewController : Controller
     {
         private readonly MvcMovieContext _context;
 
-        public ReviewModelsController(MvcMovieContext context)
+        public ReviewController(MvcMovieContext context)
         {
             _context = context;
         }
 
-        // GET: ReviewModels
+        // GET: Review
         public async Task<IActionResult> Index()
         {
             return View(await _context.ReviewModel.ToListAsync());
         }
 
-        // GET: ReviewModels/Details/5
+        // GET: Review/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -42,18 +42,18 @@ namespace MvcMovie.Controllers
             return View(reviewModel);
         }
 
-        // GET: ReviewModels/Create
+        // GET: Review/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ReviewModels/Create
+        // POST: Review/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Review")] ReviewModel reviewModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Comment,MovieTitle")] ReviewModel reviewModel)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace MvcMovie.Controllers
             return View(reviewModel);
         }
 
-        // GET: ReviewModels/Edit/5
+        // GET: Review/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,12 +80,12 @@ namespace MvcMovie.Controllers
             return View(reviewModel);
         }
 
-        // POST: ReviewModels/Edit/5
+        // POST: Review/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Review")] ReviewModel reviewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Comment,MovieTitle")] ReviewModel reviewModel)
         {
             if (id != reviewModel.Id)
             {
@@ -115,7 +115,7 @@ namespace MvcMovie.Controllers
             return View(reviewModel);
         }
 
-        // GET: ReviewModels/Delete/5
+        // GET: Review/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -133,7 +133,7 @@ namespace MvcMovie.Controllers
             return View(reviewModel);
         }
 
-        // POST: ReviewModels/Delete/5
+        // POST: Review/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
