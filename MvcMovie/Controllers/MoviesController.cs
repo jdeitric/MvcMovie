@@ -54,14 +54,19 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
+            var movieVM = new MovieViewModel();
+
+            movieVM.Movie = await _context.Movie
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (movie == null)
+
+            if (movieVM.Movie == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            movieVM.Reviews = _context.Review.Where(r => r.MovieId == id).ToList();
+
+            return View(movieVM);
         }
 
         // GET: Movies/Create

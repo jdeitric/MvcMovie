@@ -16,6 +16,6 @@ namespace MvcMovie.Models
 
         public DbSet<MvcMovie.Models.Movie> Movie { get; set; }
 
-        public DbSet<MvcMovie.Models.ReviewModel> ReviewModel { get; set; }
+        public DbSet<MvcMovie.Models.Review> Review { get; set; }
     }
 }

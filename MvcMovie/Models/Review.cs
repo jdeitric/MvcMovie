@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MvcMovie.Models
 {
-    public class ReviewModel
+    public class Review
     {
         [Required]
         public int Id { get; set; }
@@ -15,6 +15,7 @@ namespace MvcMovie.Models
 
         public string Comment { get; set; }
 
-        public string MovieTitle { get; set; }
+        [Required]
+        public int MovieId { get; set; }
     }
 }

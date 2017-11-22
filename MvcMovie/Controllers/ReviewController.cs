@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
+using System.Linq;
 
 namespace MvcMovie.Controllers
 {
@@ -21,7 +19,7 @@ namespace MvcMovie.Controllers
         // GET: Review
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ReviewModel.ToListAsync());
+            return View(await _context.Review.ToListAsync());
         }
 
         // GET: Review/Details/5
@@ -32,7 +30,7 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            var reviewModel = await _context.ReviewModel
+            var reviewModel = await _context.Review
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (reviewModel == null)
             {
@@ -53,7 +51,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Comment,MovieTitle")] ReviewModel reviewModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Comment,MovieTitle")] Review reviewModel)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +70,7 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            var reviewModel = await _context.ReviewModel.SingleOrDefaultAsync(m => m.Id == id);
+            var reviewModel = await _context.Review.SingleOrDefaultAsync(m => m.Id == id);
             if (reviewModel == null)
             {
                 return NotFound();
@@ -85,7 +83,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Comment,MovieTitle")] ReviewModel reviewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Comment,MovieTitle")] Review reviewModel)
         {
             if (id != reviewModel.Id)
             {
@@ -123,7 +121,7 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            var reviewModel = await _context.ReviewModel
+            var reviewModel = await _context.Review
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (reviewModel == null)
             {
@@ -138,15 +136,15 @@ namespace MvcMovie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var reviewModel = await _context.ReviewModel.SingleOrDefaultAsync(m => m.Id == id);
-            _context.ReviewModel.Remove(reviewModel);
+            var reviewModel = await _context.Review.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Review.Remove(reviewModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ReviewModelExists(int id)
         {
-            return _context.ReviewModel.Any(e => e.Id == id);
+            return _context.Review.Any(e => e.Id == id);
         }
     }
 }
