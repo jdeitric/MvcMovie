@@ -48,12 +48,13 @@
 </div>
 
 <h2>Reviews</h2>
-@foreach(var review in Model.Reviews)
-{
-    @review.Comment;
-}
+
 <div>
-    <p></p>
+    @foreach (var review in Model.Reviews)
+    {
+        <p>@review.Name;
+        @review.Comment;</p>
+    }
 </div>
 
 
