@@ -8,14 +8,12 @@ namespace MvcMovie.Models
 {
     public class Review
     {
-        [Required]
         public int Id { get; set; }
 
         public string Name { get; set; }
 
         public string Comment { get; set; }
 
-        [Required]
         public int MovieId { get; set; }
     }
 }

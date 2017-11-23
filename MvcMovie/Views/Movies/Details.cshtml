@@ -48,12 +48,22 @@
 </div>
 
 <h2>Reviews</h2>
-@foreach(var review in Model.Reviews)
-{
-    @review.Comment;
-}
+
 <div>
-    <p></p>
+  @foreach (var review in Model.Reviews)
+  {
+   <p>
+    <table>
+        <tr>
+            <td>@review.Comment</td>
+            <td></td>
+            <td><a asp-action="Edit" asp-controller="Review">Edit</a></td>
+            <td></td>
+            <td><a asp-action="Delete" asp-controller="Review">Delete</a></td>
+        </tr>
+    </table>
+    </p>
+  }
 </div>
 
-
+<a asp-action="Create" asp-controller="Review" asp-route-id="@Model.Movie.ID">Add a Review</a>

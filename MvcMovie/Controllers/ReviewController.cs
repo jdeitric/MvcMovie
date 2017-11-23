@@ -41,9 +41,11 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Review/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            return View();
+            var model = new Review();
+            model.MovieId = id;
+            return View(model);
         }
 
         // POST: Review/Create
@@ -51,13 +53,13 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Comment,MovieTitle")] Review reviewModel)
+        public async Task<IActionResult> Create([Bind("Name,Comment,MovieId")] Review reviewModel)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(reviewModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index),"Movies");
             }
             return View(reviewModel);
         }
@@ -83,7 +85,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Comment,MovieTitle")] Review reviewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Comment,MovieId")] Review reviewModel)
         {
             if (id != reviewModel.Id)
             {
