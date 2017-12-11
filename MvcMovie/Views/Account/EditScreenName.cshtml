@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Edit Screen Name";
+}
+
+<h2>Edit Screen Name</h2>
+<form asp-action="EditScreenName">
+    <label>Current screen name</label>
+    <input type="text" name="newName" value="@ViewBag.ScreenName" />
+    <input type="submit" value="Submit" />
+</form>

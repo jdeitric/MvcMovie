@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using MvcMovie.Models;
 
-namespace BookDemo.Controllers
+namespace MvcMovie.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
@@ -12,11 +12,13 @@ namespace BookDemo.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        private readonly MvcMovieContext _context;
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+            MvcMovieContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         [HttpGet]
@@ -27,7 +29,7 @@ namespace BookDemo.Controllers
             return View();
         }
 
-        //
+
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -36,7 +38,7 @@ namespace BookDemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, ScreenName = model.ScreenName };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -66,7 +68,7 @@ namespace BookDemo.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: false, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(returnUrl))
@@ -91,9 +93,35 @@ namespace BookDemo.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(MvcMovie.Controllers.HomeController.Index), "Home");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> EditScreenName()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            ViewData["ScreenName"] = user.ScreenName;
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EditScreenName(string newName)
+        {
+
+            var user = await _userManager.GetUserAsync(User);
+            user.ScreenName = newName;
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View();
+            }
+        }
         public IActionResult AccessDenied()
         {
             return View();
