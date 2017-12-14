@@ -20,6 +20,7 @@ interface Movie {
     ID: number;
     title: string;
     releaseDate: number;
+    genre: string;
     price: number;
     rating: string;
 }

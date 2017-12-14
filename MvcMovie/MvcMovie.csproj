@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="angularjs" Version="1.6.6" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
     <PackageReference Include="Node.js" Version="5.3.0" />
   </ItemGroup>
 
@@ -23,10 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\movies\movie.component.ts" />
     <None Remove="ClientApp\app\components\movies\movies.component.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\movies\movie.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\movies\movies.component.ts" />
   </ItemGroup>
 
