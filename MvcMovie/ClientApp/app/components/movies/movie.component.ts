@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'app-movie',
     templateUrl: './movie.component.html',
-   
+    styleUrls: ['./movie.component.css']
 })
 export class MovieComponent {
 
@@ -23,7 +23,11 @@ interface Movie {
     ID: number;
     title: string;
     releaseDate: number;
+    genre: string;
     price: number;
     rating: string;
 }
+
+
+
 

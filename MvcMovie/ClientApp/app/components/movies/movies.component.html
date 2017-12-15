@@ -1,6 +1,10 @@
 ﻿<h1>Movie List</h1>
 
-<p *ngIf="!movies"><em>Loading...</em></p>
+<p *ngIf="!movies"><i class="fade fa-spinner fa-pulse fa-2x fa-fw"></i>
+<em>Loading...</em></p>
+
+<a [routerLink]="['/addmovie']" class="btn btn-lg btn-info" *ngIf="movies">ADD A MOVIE</a>
+
 
 <table class='table' *ngIf="movies">
     <thead>
