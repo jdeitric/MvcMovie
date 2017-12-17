@@ -1,10 +1,10 @@
 ﻿<h2>Add a Movie</h2>
 
 <form class="form" #movieForm="ngForm" (ngSubmit)="onSubmit()">
-    <div>Title: <input type="text" name="title" [(ngModel)]="model.title" /></div>
-    <div>Release Date: <input type="date" name="releaseDate" [(ngModel)]="model.releaseDate" /></div>
-    <div>Genre: <input type="text" name="genre" [(ngModel)]="model.genre" /></div>
-    <div>Price: <input type="text" name="price" [(ngModel)]="model.price" /></div>
-    <div>Rating: <input type="text" name="rating" [(ngModel)]="model.rating" /></div>
+    <div>Title: <input type="text" name="title" [(ngModel)]="movie.title" /></div>
+    <div>Release Date: <input type="date" name="releaseDate" [(ngModel)]="movie.releaseDate" /></div>
+    <div>Genre: <input type="text" name="genre" [(ngModel)]="movie.genre" /></div>
+    <div>Price: <input type="text" name="price" [(ngModel)]="movie.price" /></div>
+    <div>Rating: <input type="text" name="rating" [(ngModel)]="movie.rating" /></div>
     <button type="submit" class="btn btn-info">Submit</button>
 </form>

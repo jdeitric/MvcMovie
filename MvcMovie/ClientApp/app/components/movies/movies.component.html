@@ -1,7 +1,7 @@
 ﻿<h1>Movie List</h1>
 
 <p *ngIf="!movies"><i class="fade fa-spinner fa-pulse fa-2x fa-fw"></i>
-<em>Loading...</em></p>
+<em class="sr-only">Loading...</em></p>
 
 <a [routerLink]="['/addmovie']" class="btn btn-lg btn-info" *ngIf="movies">ADD A MOVIE</a>
 
@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let movie of movies">
+        <tr class="rowlink" *ngFor="let movie of movies" [routerLink]="['/movie/', movie.movieID]">
             <td>{{ movie.title }}</td>
             <td>{{ movie.releaseDate }}</td>
             <td>{{ movie.genre }}</td>

@@ -20,7 +20,7 @@ export class MoviesComponent {
 interface Movie {
     ID: number;
     title: string;
-    releaseDate: number;
+    releaseDate: Date;
     genre: string;
     price: number;
     rating: string;
